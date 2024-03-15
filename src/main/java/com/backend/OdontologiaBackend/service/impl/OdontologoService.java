@@ -1,9 +1,9 @@
 package com.backend.OdontologiaBackend.service.impl;
 
-import com.backend.OdontologiaBackend.dao.IDao;
 import com.backend.OdontologiaBackend.dto.entrada.OdontologoEntradaDto;
 import com.backend.OdontologiaBackend.dto.salida.OdontologoSalidaDto;
 import com.backend.OdontologiaBackend.entity.Odontologo;
+import com.backend.OdontologiaBackend.repository.OdontologoRepository;
 import com.backend.OdontologiaBackend.service.IOdontologoService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -16,12 +16,13 @@ import java.util.List;
 @Service
 public class OdontologoService implements IOdontologoService {
     private final Logger logger = LoggerFactory.getLogger(OdontologoService.class);
-    private IDao<Odontologo> odontologoIDao;
+
+    private OdontologoRepository odontologoRepository;
     private final ModelMapper modelMapper;
 
-    @Autowired
-    public OdontologoService(IDao<Odontologo> odontologoDao, ModelMapper modelMapper) {
-        this.odontologoIDao = odontologoDao;
+    //@Autowired
+    public OdontologoService(OdontologoRepository odontologoRepository, ModelMapper modelMapper) {
+        this.odontologoRepository = odontologoRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -30,7 +31,7 @@ public class OdontologoService implements IOdontologoService {
 
             Odontologo odontologoEntity = modelMapper.map(odontologo, Odontologo.class);
 
-            Odontologo odontologoConId = odontologoIDao.registrar(odontologoEntity);
+            Odontologo odontologoConId = odontologoRepository.save(odontologoEntity);
 
             OdontologoSalidaDto odontologoSalidaDto = modelMapper.map(odontologoConId, OdontologoSalidaDto.class);
 
@@ -42,7 +43,7 @@ public class OdontologoService implements IOdontologoService {
     @Override
     public List<OdontologoSalidaDto> listarTodos() {
 
-        List<OdontologoSalidaDto> odontologosSalidaDto = odontologoIDao.listarTodos()
+        List<OdontologoSalidaDto> odontologosSalidaDto = odontologoRepository.findAll()
                 .stream()
                 .map(odontologo -> modelMapper.map(odontologo, OdontologoSalidaDto.class))
                 .toList();
@@ -53,8 +54,8 @@ public class OdontologoService implements IOdontologoService {
     }
 
     @Override
-    public OdontologoSalidaDto buscarPorId(int id) {
-        Odontologo odontologoBuscado = odontologoIDao.buscarPorId(id);
+    public OdontologoSalidaDto buscarPorId(Long id) {
+        Odontologo odontologoBuscado = odontologoRepository.findById(id).orElse(null);
 
         OdontologoSalidaDto odontologoEncontrado = null;
 

@@ -3,7 +3,7 @@ package com.backend.OdontologiaBackend.dto.salida;
 public class OdontologoSalidaDto {
 
     //No validacion ya que esta previamente validado por el codigo en sí.
-    private int id;
+    private Long id;
     private int numeroMatricula;
     private String nombre;
     private String apellido;
@@ -11,18 +11,18 @@ public class OdontologoSalidaDto {
     public OdontologoSalidaDto() {
     }
 
-    public OdontologoSalidaDto(int id, int numeroMatricula, String nombre, String apellido) {
+    public OdontologoSalidaDto(Long id, int numeroMatricula, String nombre, String apellido) {
         this.id = id;
         this.numeroMatricula = numeroMatricula;
         this.nombre = nombre;
         this.apellido = apellido;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -10,5 +10,5 @@ import java.util.List;
 public interface IPacienteService {
     PacienteSalidaDto registrarPaciente(PacienteEntradaDto paciente);
     List<PacienteSalidaDto> listarPacientes();
-    PacienteSalidaDto buscarPacientePorId(int id);
+    PacienteSalidaDto buscarPacientePorId(Long id);
 }

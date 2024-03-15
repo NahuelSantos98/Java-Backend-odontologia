@@ -1,9 +1,20 @@
 package com.backend.OdontologiaBackend.entity;
 
+import javax.persistence.*;
+import javax.print.attribute.standard.MediaSize;
+
+@Entity
+@Table(name = "ODONTOLOGOS")
 public class Odontologo {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(length = 50)
     private int numeroMatricula;
+    @Column(length = 50)
     private String nombre;
+    @Column(length = 50)
     private String apellido;
 
     public Odontologo(int numeroMatricula, String nombre, String apellido) {
@@ -12,19 +23,18 @@ public class Odontologo {
         this.apellido = apellido;
     }
 
-    public Odontologo(int id, int numeroMatricula, String nombre, String apellido) {
+    public Odontologo(Long id, int numeroMatricula, String nombre, String apellido) {
         this.id = id;
         this.numeroMatricula = numeroMatricula;
         this.nombre = nombre;
         this.apellido = apellido;
     }
 
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

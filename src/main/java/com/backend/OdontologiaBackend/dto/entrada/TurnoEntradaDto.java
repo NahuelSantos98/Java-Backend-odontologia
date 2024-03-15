@@ -10,42 +10,39 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class TurnoEntradaDto {
-    @NotNull(message = "El odontologo no puede ser nulo")
-    @Valid
-    private Odontologo odontologo;
-
-    @NotNull(message = "El paciente no puede ser nulo")
-    @Valid
-    private Paciente paciente;
+    @NotNull(message = "El Paciente no puede ser nulo")
+    private Long pacienteId;
+    @NotNull(message = "El Odontologo no puede ser nulo")
+    private Long odontolofoId;
 
     @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
-    @NotNull(message = "Debe especificarse la fecha del turno")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @NotNull(message = "Debe especificarse la fecha y la hora del turno")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaYHora;
 
     public TurnoEntradaDto() {
     }
 
-    public TurnoEntradaDto(Odontologo odontologo, Paciente paciente, LocalDateTime fechaYHora) {
-        this.odontologo = odontologo;
-        this.paciente = paciente;
+    public TurnoEntradaDto(Long pacienteId, Long odontolofoId, LocalDateTime fechaYHora) {
+        this.pacienteId = pacienteId;
+        this.odontolofoId = odontolofoId;
         this.fechaYHora = fechaYHora;
     }
 
-    public Odontologo getOdontologo() {
-        return odontologo;
+    public Long getPacienteId() {
+        return pacienteId;
     }
 
-    public void setOdontologo(Odontologo odontologo) {
-        this.odontologo = odontologo;
+    public void setPacienteId(Long pacienteId) {
+        this.pacienteId = pacienteId;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public Long getOdontolofoId() {
+        return odontolofoId;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setOdontolofoId(Long odontolofoId) {
+        this.odontolofoId = odontolofoId;
     }
 
     public LocalDateTime getFechaYHora() {

@@ -10,17 +10,17 @@ public class OdontologoEntradaDto {
 
     @NotNull(message = "El numero de matricula no puede ser nulo")
     @Size(max = 50, message = "El campo debe tener minimo 10 caracteres y maximo 50")
-    @Positive(message = "No puede ser nulo")
+    @Positive(message = "El numero de matricula debe ser positivo")
     private int numeroMatricula;
 
-    @NotNull(message = "El nombre de odontólogo no puede ser nulo")
+    @NotNull(message = "El nombre del odontólogo no puede ser nulo")
     @NotBlank(message = "Debe especificarse el nombre del odontólogo")
-    @Size(min = 2, max = 50, message = "El nombre del odontólogo debe tener hasta 50 caracteres")
+    @Size(min = 3, max = 50, message = "El nombre del Odontologo debe tener entre 3 y 50 caracteres")
     private String nombre;
 
-    @NotNull(message = "El apellido de odontólogo no puede ser nulo")
+    @NotNull(message = "El apellido del odontólogo no puede ser nulo")
     @NotBlank(message = "Debe especificarse el apellido del odontólogo")
-    @Size(min = 2, max = 50, message = "El apellido de odontólogo debe tener hasta 50 caracteres")
+    @Size(min = 3, max = 50, message = "El apellido del odontólogo debe tener entre 3 y 50 caracteres")
     private String apellido;
 
     public OdontologoEntradaDto() {

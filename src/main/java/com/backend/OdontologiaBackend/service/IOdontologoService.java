@@ -10,5 +10,5 @@ import java.util.List;
 public interface IOdontologoService {
     OdontologoSalidaDto registrar(OdontologoEntradaDto odontologo);
     List<OdontologoSalidaDto> listarTodos();
-    OdontologoSalidaDto buscarPorId(int id);
+    OdontologoSalidaDto buscarPorId(Long id);
 }

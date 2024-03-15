@@ -3,6 +3,7 @@ package com.backend.OdontologiaBackend.service.impl;
 import com.backend.OdontologiaBackend.dao.IDao;
 import com.backend.OdontologiaBackend.dto.entrada.PacienteEntradaDto;
 import com.backend.OdontologiaBackend.dto.salida.PacienteSalidaDto;
+import com.backend.OdontologiaBackend.repository.PacienteRepository;
 import com.backend.OdontologiaBackend.service.IPacienteService;
 import com.backend.OdontologiaBackend.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
@@ -19,17 +20,15 @@ public class PacienteService implements IPacienteService {
 
     private final Logger logger = LoggerFactory.getLogger(PacienteService.class);
 
-
-    private IDao<Paciente> pacienteIDao;
+    private PacienteRepository pacienteRepository;
     private final ModelMapper modelMapper;
 
-@Autowired
-    public PacienteService(IDao<Paciente> pacienteIDao, ModelMapper modelMapper) {
-        this.pacienteIDao = pacienteIDao;
+    //@Autowired No hace falta porque Spring ya lo reconoce
+    public PacienteService(PacienteRepository pacienteRepository, ModelMapper modelMapper) {
+        this.pacienteRepository = pacienteRepository;
         this.modelMapper = modelMapper;
         configureMapping();
     }
-
 
     @Override
     public PacienteSalidaDto registrarPaciente(PacienteEntradaDto paciente) {
@@ -40,8 +39,8 @@ public class PacienteService implements IPacienteService {
         //Se crea el paciente entidad y se le pasa el pacienteEntrada asi lo convierte a Paciente
         Paciente pacienteEntidad = modelMapper.map(paciente, Paciente.class); //Convierte el pacienteEntrada a Paciente
 
-        //Tiene que tener id el Paciente asi que creamos una nueva entidad que con el Idao.registrar() va a darnos el id
-        Paciente pacienteEntidadConId = pacienteIDao.registrar(pacienteEntidad);
+        //Tiene que tener id el Paciente asi que creamos una nueva entidad que con el .save() y va a darnos el id. Es el registrar.
+        Paciente pacienteEntidadConId = pacienteRepository.save(pacienteEntidad);
 
         //Se mapea al PacienteSalida asi se obtiene lo que la function DEBE retornar y con todos los atributos hechos.
         PacienteSalidaDto pacienteSalidaDto = modelMapper.map(pacienteEntidadConId, PacienteSalidaDto.class);
@@ -54,7 +53,7 @@ public class PacienteService implements IPacienteService {
     @Override
     public List<PacienteSalidaDto> listarPacientes() {
 
-    List<PacienteSalidaDto> pacientesSalidaDto = pacienteIDao.listarTodos()
+    List<PacienteSalidaDto> pacientesSalidaDto = pacienteRepository.findAll()
             .stream()//Vuelve la lista de pacientes a un Stream de pacientes, permite procesar y transformar los elementos de la lista de manera funcional y declarativa
             .map(paciente -> modelMapper.map(paciente, PacienteSalidaDto.class)) //Itera sobre la List y cada elemento lo pasa a un PacienteSalida
             .toList(); //Los vuelve a listar.
@@ -65,10 +64,10 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public PacienteSalidaDto buscarPacientePorId(int id) {
+    public PacienteSalidaDto buscarPacientePorId(Long id) {
 
         //Paciente pase a PacienteSalida. Para eso tiene que pasar por el mapper, YA TIENE el ID.
-        Paciente pacienteBuscado = pacienteIDao.buscarPorId(id);    //Se declara un paciente que es el que se busca.
+        Paciente pacienteBuscado = pacienteRepository.findById(id).orElse(null);    //Se pone el .orElse(null) si no lo encuentra = null
         PacienteSalidaDto pacienteEncontrado = null;   //Se declara afuera por las dudas de que NO lo encuentre.
 
         if(pacienteBuscado != null){
@@ -76,8 +75,7 @@ public class PacienteService implements IPacienteService {
         }else logger.error("El paciente que usted busca no se ha encontrado.");
 
 
-
-        return null;
+        return pacienteEncontrado;
     }
 
     private void configureMapping(){

@@ -1,21 +1,28 @@
 package com.backend.OdontologiaBackend.entity;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name="DOMICILIOS")
 public class Domicilio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "domicilioId")
-    private int id;
+    private Long id;
+    @Column(length = 100)
     private String calle;
+    @Column(length = 8)
     private int numero;
+    @Column(length = 50)
     private String localidad;
+    @Column(length = 58)
     private String provincia;
 
-    public Domicilio(int id, String calle, int numero, String localidad, String provincia) {
+    public Domicilio() {
+    }
+
+    public Domicilio(Long id, String calle, int numero, String localidad, String provincia) {
         this.id = id;
         this.calle = calle;
         this.numero = numero;
@@ -23,18 +30,11 @@ public class Domicilio {
         this.provincia = provincia;
     }
 
-    public Domicilio(String calle, int numero, String localidad, String provincia) {
-        this.calle = calle;
-        this.numero = numero;
-        this.localidad = localidad;
-        this.provincia = provincia;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -32,7 +32,7 @@ public class PacienteController {
 
     //BUSCAR
    @GetMapping("/buscar/{id}")        //localhost:8080/pacientes/x
-   public ResponseEntity<PacienteSalidaDto> buscarPacienteId(@PathVariable int id){
+   public ResponseEntity<PacienteSalidaDto> buscarPacienteId(@PathVariable Long id){
         return new ResponseEntity<>(pacienteService.buscarPacientePorId(id), HttpStatus.FOUND);
    }
 
@@ -50,7 +50,7 @@ public class PacienteController {
 
     //BORRAR
     @DeleteMapping("/borrar")   //localhost:8080/pacientes/eliminar?id=x
-    public ResponseEntity<?> borrarPaciente(@RequestParam int id){      //Se deja el ? Se deja abierta la posibilidad que se pueda hacer cua;quier cosa.
+    public ResponseEntity<?> borrarPaciente(@RequestParam Long id){      //Se deja el ? Se deja abierta la posibilidad que se pueda hacer cua;quier cosa.
         //pacienteService.eliminar(id)
         return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.OK);
     }

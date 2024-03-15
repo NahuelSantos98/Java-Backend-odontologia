@@ -10,14 +10,15 @@ import java.time.LocalDate;
 public class PacienteEntradaDto {
     @NotNull(message = "El nombre del paciente no puede ser nulo")
     @NotBlank(message = "Debe especificarse el nombre del paciente")
-    @Size(max = 50, message = "El nombre debe tener hasta 50 caracteres")
+    @Size(min = 3, max = 50, message = "El nombre de paciente debe tener hasta 50 caracteres")
     private String nombre;
 
-    @NotNull(message = "El apellido no puede ser nulo")
+    @NotNull(message = "El apellido del paciente no puede ser nulo")
     @NotBlank(message = "Debe especificarse el apellido del paciente")
-    @Size(max = 50, message = "El apellido debe tener hasta 50 caracteres")
+    @Size(min = 3, max = 50, message = "El apellido del paciente debe tener hasta 50 caracteres")
     private String apellido;
     @Positive(message = "El dni del paciente no puede ser nulo o menor a cero")
+    @Digits(integer = 12, fraction = 0, message = "El dni debe tener como máximo 12 dígitos")
     private int dni;
     @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
     @NotNull(message = "Debe especificarse la fecha de ingreso del paciente")

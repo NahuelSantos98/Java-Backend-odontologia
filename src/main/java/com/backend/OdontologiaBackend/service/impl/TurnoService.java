@@ -1,9 +1,9 @@
 package com.backend.OdontologiaBackend.service.impl;
 
-import com.backend.OdontologiaBackend.dao.IDao;
 import com.backend.OdontologiaBackend.dto.entrada.TurnoEntradaDto;
 import com.backend.OdontologiaBackend.dto.salida.TurnoSalidaDto;
-import com.backend.OdontologiaBackend.entity.Turno;
+
+import com.backend.OdontologiaBackend.repository.TurnoRepository;
 import com.backend.OdontologiaBackend.service.ITurnoService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -16,49 +16,24 @@ public class TurnoService implements ITurnoService {
 
     private Logger logger = LoggerFactory.getLogger(TurnoService.class);
 
-    private IDao<Turno> turnoIDao;
+    private TurnoRepository turnoRepository;
 
     private final ModelMapper modelMapper;
 
-    public TurnoService(IDao<Turno> turnoIDao, ModelMapper modelMapper) {
-        this.turnoIDao = turnoIDao;
+    public TurnoService(TurnoRepository turnoRepository, ModelMapper modelMapper) {
+        this.turnoRepository = turnoRepository;
         this.modelMapper = modelMapper;
     }
 
     @Override
     public TurnoSalidaDto registrar(TurnoEntradaDto turno) {
-
-
-
-
-        return turnoIDao.registrar(turno);
+        return null;
     }
 
     @Override
     public List<TurnoSalidaDto> listarTurnos() {
-
-        return turnoIDao.listarTodos();
+        return null;
     }
-
-    public Boolean pacienteIsValid() {
-
-
-        return false;
-    }
-
-    public Boolean odontologoIsValid() {
-
-
-        return false;
-    }
-
-    private void configureMapping(){
-
-
-    }
-
-
-
 }
 
 

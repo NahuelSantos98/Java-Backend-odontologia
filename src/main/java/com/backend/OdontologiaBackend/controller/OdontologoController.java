@@ -21,7 +21,7 @@ public class OdontologoController {
 
     //BUSCAR
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<OdontologoSalidaDto> buscarOdontologoId(@PathVariable int id){
+    public ResponseEntity<OdontologoSalidaDto> buscarOdontologoId(@PathVariable Long id){
         return new ResponseEntity<>(odontologoService.buscarPorId(id), HttpStatus.OK);
     }
 
@@ -39,7 +39,7 @@ public class OdontologoController {
 
     //BORRAR
     @DeleteMapping("/borrar")
-    public ResponseEntity<?> eliminarOdontologo(@RequestParam int id){
+    public ResponseEntity<?> eliminarOdontologo(@RequestParam Long id){
         //odontologoService.borrar(id)
         return new ResponseEntity<>("El Odontologo fue borrado", HttpStatus.OK);
     }

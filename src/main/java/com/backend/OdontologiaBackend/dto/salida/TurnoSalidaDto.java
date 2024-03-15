@@ -2,30 +2,32 @@ package com.backend.OdontologiaBackend.dto.salida;
 
 import com.backend.OdontologiaBackend.entity.Odontologo;
 import com.backend.OdontologiaBackend.entity.Paciente;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 
 public class TurnoSalidaDto {
-    private int id;
+    private Long id;
     private OdontologoSalidaDto odontologoSalidaDto;
     private PacienteSalidaDto pacienteSalidaDto;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaYHora;
 
     public TurnoSalidaDto() {
     }
 
-    public TurnoSalidaDto(int id, OdontologoSalidaDto odontologoSalidaDto, PacienteSalidaDto pacienteSalidaDto, LocalDateTime fechaYHora) {
+    public TurnoSalidaDto(Long id, OdontologoSalidaDto odontologoSalidaDto, PacienteSalidaDto pacienteSalidaDto, LocalDateTime fechaYHora) {
         this.id = id;
         this.odontologoSalidaDto = odontologoSalidaDto;
         this.pacienteSalidaDto = pacienteSalidaDto;
         this.fechaYHora = fechaYHora;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
