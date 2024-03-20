@@ -13,7 +13,7 @@ public class TurnoEntradaDto {
     @NotNull(message = "El Paciente no puede ser nulo")
     private Long pacienteId;
     @NotNull(message = "El Odontologo no puede ser nulo")
-    private Long odontolofoId;
+    private Long odontologoId;
 
     @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
     @NotNull(message = "Debe especificarse la fecha y la hora del turno")
@@ -23,9 +23,9 @@ public class TurnoEntradaDto {
     public TurnoEntradaDto() {
     }
 
-    public TurnoEntradaDto(Long pacienteId, Long odontolofoId, LocalDateTime fechaYHora) {
+    public TurnoEntradaDto(Long pacienteId, Long odontologoId, LocalDateTime fechaYHora) {
         this.pacienteId = pacienteId;
-        this.odontolofoId = odontolofoId;
+        this.odontologoId = odontologoId;
         this.fechaYHora = fechaYHora;
     }
 
@@ -37,12 +37,12 @@ public class TurnoEntradaDto {
         this.pacienteId = pacienteId;
     }
 
-    public Long getOdontolofoId() {
-        return odontolofoId;
+    public Long getOdontologoId() {
+        return odontologoId;
     }
 
-    public void setOdontolofoId(Long odontolofoId) {
-        this.odontolofoId = odontolofoId;
+    public void setOdontologoId(Long odontolofoId) {
+        this.odontologoId = odontolofoId;
     }
 
     public LocalDateTime getFechaYHora() {

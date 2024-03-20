@@ -1,8 +1,12 @@
 package com.backend.OdontologiaBackend.service.impl;
 
+import com.backend.OdontologiaBackend.dto.entrada.PacienteEntradaDto;
 import com.backend.OdontologiaBackend.dto.entrada.TurnoEntradaDto;
+import com.backend.OdontologiaBackend.dto.salida.PacienteSalidaDto;
 import com.backend.OdontologiaBackend.dto.salida.TurnoSalidaDto;
 
+import com.backend.OdontologiaBackend.entity.Paciente;
+import com.backend.OdontologiaBackend.entity.Turno;
 import com.backend.OdontologiaBackend.repository.TurnoRepository;
 import com.backend.OdontologiaBackend.service.ITurnoService;
 import org.modelmapper.ModelMapper;
@@ -20,9 +24,14 @@ public class TurnoService implements ITurnoService {
 
     private final ModelMapper modelMapper;
 
-    public TurnoService(TurnoRepository turnoRepository, ModelMapper modelMapper) {
+    private PacienteService pacienteService;
+    private OdontologoService odontologoService;
+
+    public TurnoService(TurnoRepository turnoRepository, ModelMapper modelMapper, PacienteService pacienteService, OdontologoService odontologoService) {
         this.turnoRepository = turnoRepository;
         this.modelMapper = modelMapper;
+        this.pacienteService = pacienteService;
+        this.odontologoService = odontologoService;
     }
 
     @Override
@@ -31,9 +40,11 @@ public class TurnoService implements ITurnoService {
     }
 
     @Override
-    public List<TurnoSalidaDto> listarTurnos() {
-        return null;
+    public List<TurnoSalidaDto> listarTurnos() {return null;
     }
+
+
+
 }
 
 

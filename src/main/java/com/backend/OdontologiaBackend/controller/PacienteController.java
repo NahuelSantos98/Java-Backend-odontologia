@@ -42,7 +42,7 @@ public class PacienteController {
         return new ResponseEntity<>(pacienteService.registrarPaciente(paciente), HttpStatus.CREATED);
     }
 
-    //ACUTALIZAR
+    //ACTUALIZAR
     @PutMapping("/actualizar/{id}")     //localhost:8080/actualizar/x
     public ResponseEntity<PacienteSalidaDto> actualizarPaciente(@RequestBody @Valid PacienteEntradaDto paciente){  //Va a recibir en el body un cliente entero
         return null; //pacienteService.actualizar(paciente)

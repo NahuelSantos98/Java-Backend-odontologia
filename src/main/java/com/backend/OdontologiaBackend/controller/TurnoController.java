@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/turno")
+@RequestMapping("/turnos")
 public class TurnoController {
     private ITurnoService IturnoService;
 
@@ -23,7 +23,7 @@ public class TurnoController {
 
     @GetMapping("/listar")
     public ResponseEntity<List<TurnoSalidaDto>> listarTodos(){
-        return new ResponseEntity<>(IturnoService.listarTurnos(), HttpStatus.CREATED);
+        return new ResponseEntity<>(IturnoService.listarTurnos(), HttpStatus.OK);
     }
 
     @PostMapping("/registrar")

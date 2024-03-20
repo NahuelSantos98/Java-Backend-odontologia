@@ -1,6 +1,5 @@
 package com.backend.OdontologiaBackend.service.impl;
 
-import com.backend.OdontologiaBackend.dao.IDao;
 import com.backend.OdontologiaBackend.dto.entrada.PacienteEntradaDto;
 import com.backend.OdontologiaBackend.dto.salida.PacienteSalidaDto;
 import com.backend.OdontologiaBackend.repository.PacienteRepository;

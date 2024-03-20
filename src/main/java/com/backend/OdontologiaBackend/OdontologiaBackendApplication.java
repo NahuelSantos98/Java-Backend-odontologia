@@ -20,8 +20,9 @@ public class OdontologiaBackendApplication {
 
 	@Bean
 	public ModelMapper modelMapper(){		//Permite que podamos usar un modelMapper
-		return modelMapper();
+		return new ModelMapper();
 	}
+
 
 
 }

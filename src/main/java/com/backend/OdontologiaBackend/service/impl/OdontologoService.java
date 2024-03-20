@@ -8,7 +8,6 @@ import com.backend.OdontologiaBackend.service.IOdontologoService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +19,6 @@ public class OdontologoService implements IOdontologoService {
     private OdontologoRepository odontologoRepository;
     private final ModelMapper modelMapper;
 
-    //@Autowired
     public OdontologoService(OdontologoRepository odontologoRepository, ModelMapper modelMapper) {
         this.odontologoRepository = odontologoRepository;
         this.modelMapper = modelMapper;
