@@ -2,6 +2,7 @@ package com.backend.OdontologiaBackend.service.impl;
 
 import com.backend.OdontologiaBackend.dto.entrada.PacienteEntradaDto;
 import com.backend.OdontologiaBackend.dto.salida.PacienteSalidaDto;
+import com.backend.OdontologiaBackend.exceptions.ResourceNotFoundException;
 import com.backend.OdontologiaBackend.repository.PacienteRepository;
 import com.backend.OdontologiaBackend.service.IPacienteService;
 import com.backend.OdontologiaBackend.utils.JsonPrinter;
@@ -73,8 +74,36 @@ public class PacienteService implements IPacienteService {
             pacienteEncontrado = modelMapper.map(pacienteBuscado, PacienteSalidaDto.class);
         }else logger.error("El paciente que usted busca no se ha encontrado.");
 
-
         return pacienteEncontrado;
+    }
+
+    @Override
+    public void eliminarPaciente(Long id) throws ResourceNotFoundException {
+        if (pacienteRepository.findById(id) == null){       //Se implementa otro metodo dentro del Service para asegurar que exista.
+            pacienteRepository.deleteById(id);
+            logger.warn("El paciente con id {} ha sido eliminado correctamente.", id);
+        } else {
+            throw new ResourceNotFoundException("No existe un paciente con id " + id);
+        }
+    }
+
+    @Override
+    public PacienteSalidaDto modificarPaciente(PacienteEntradaDto pacienteEntradaDto, Long id) {
+        Paciente pacienteEntity = modelMapper.map(pacienteEntradaDto, Paciente.class);
+        Paciente pacienteParaActualizar = pacienteRepository.findById(id).orElse(null);
+        PacienteSalidaDto pacienteSalidaDto = null;
+
+        if (pacienteParaActualizar != null){
+            pacienteParaActualizar = pacienteEntity;
+            pacienteRepository.save(pacienteParaActualizar);
+            pacienteSalidaDto = modelMapper.map(pacienteParaActualizar, PacienteSalidaDto.class);
+            logger.warn("El paciente fue actualizado con exito: {}", pacienteSalidaDto);
+        }else {
+            logger.error("El paciente no se encuentra registrado, por lo tanto no es posible atualizarlo.");
+        }
+
+        return pacienteSalidaDto;
+
     }
 
     private void configureMapping(){
