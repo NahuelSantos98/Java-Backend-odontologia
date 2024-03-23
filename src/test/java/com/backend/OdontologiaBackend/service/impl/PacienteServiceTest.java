@@ -38,7 +38,6 @@ class PacienteServiceTest {
         assertNotNull(pacienteSalidaDto);
         assertNotNull(pacienteSalidaDto.getId());
         assertEquals("Raul", pacienteSalidaDto.getNombre());
-
     }
 
     @Test
