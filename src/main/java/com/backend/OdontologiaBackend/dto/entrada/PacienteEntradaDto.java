@@ -28,12 +28,12 @@ public class PacienteEntradaDto {
 
     @NotNull(message = "El domicilio del paciente no puede ser nulo")
     @Valid
-    private Domicilio domicilio;
+    private DomicilioEntradaDto domicilio;
 
     public PacienteEntradaDto() {
     }
 
-    public PacienteEntradaDto(String nombre, String apellido, int dni, LocalDate fechaIngreso, Domicilio domicilio) {
+    public PacienteEntradaDto(String nombre, String apellido, int dni, LocalDate fechaIngreso, DomicilioEntradaDto domicilio) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -73,11 +73,11 @@ public class PacienteEntradaDto {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public Domicilio getDomicilio() {
+    public DomicilioEntradaDto getDomicilio() {
         return domicilio;
     }
 
-    public void setDomicilio(Domicilio domicilio) {
+    public void setDomicilio(DomicilioEntradaDto domicilio) {
         this.domicilio = domicilio;
     }
 }

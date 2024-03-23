@@ -1,7 +1,10 @@
 package com.backend.OdontologiaBackend.service.impl;
 
+import com.backend.OdontologiaBackend.dto.entrada.OdontologoEntradaDto;
 import com.backend.OdontologiaBackend.dto.entrada.PacienteEntradaDto;
+import com.backend.OdontologiaBackend.dto.salida.OdontologoSalidaDto;
 import com.backend.OdontologiaBackend.dto.salida.PacienteSalidaDto;
+import com.backend.OdontologiaBackend.entity.Odontologo;
 import com.backend.OdontologiaBackend.exceptions.ResourceNotFoundException;
 import com.backend.OdontologiaBackend.repository.PacienteRepository;
 import com.backend.OdontologiaBackend.service.IPacienteService;
@@ -45,7 +48,7 @@ public class PacienteService implements IPacienteService {
         //Se mapea al PacienteSalida asi se obtiene lo que la function DEBE retornar y con todos los atributos hechos.
         PacienteSalidaDto pacienteSalidaDto = modelMapper.map(pacienteEntidadConId, PacienteSalidaDto.class);
 
-        logger.info("Paciente que devolvemos al registrar: {}", pacienteSalidaDto);
+        logger.info("Paciente que devolvemos al registrar: {}",  JsonPrinter.toString(pacienteSalidaDto));
 
         return pacienteSalidaDto;
     }
@@ -58,7 +61,7 @@ public class PacienteService implements IPacienteService {
             .map(paciente -> modelMapper.map(paciente, PacienteSalidaDto.class)) //Itera sobre la List y cada elemento lo pasa a un PacienteSalida
             .toList(); //Los vuelve a listar.
 
-        logger.info("listado de todos los pacientes: {}", pacientesSalidaDto);
+        logger.info("listado de todos los pacientes: {}",  JsonPrinter.toString(pacientesSalidaDto));
 
         return pacientesSalidaDto;
     }
@@ -79,11 +82,12 @@ public class PacienteService implements IPacienteService {
 
     @Override
     public void eliminarPaciente(Long id) throws ResourceNotFoundException {
-        if (pacienteRepository.findById(id) == null){       //Se implementa otro metodo dentro del Service para asegurar que exista.
+
+        if (buscarPacientePorId(id) != null) {
             pacienteRepository.deleteById(id);
-            logger.warn("El paciente con id {} ha sido eliminado correctamente.", id);
+            logger.warn("Se ha eliminado el paciente con id {}", id);
         } else {
-            throw new ResourceNotFoundException("No existe un paciente con id " + id);
+            throw new ResourceNotFoundException("No existe registro de paciente con id " + id);
         }
     }
 
@@ -93,18 +97,25 @@ public class PacienteService implements IPacienteService {
         Paciente pacienteParaActualizar = pacienteRepository.findById(id).orElse(null);
         PacienteSalidaDto pacienteSalidaDto = null;
 
-        if (pacienteParaActualizar != null){
-            pacienteParaActualizar = pacienteEntity;
-            pacienteRepository.save(pacienteParaActualizar);
-            pacienteSalidaDto = modelMapper.map(pacienteParaActualizar, PacienteSalidaDto.class);
-            logger.warn("El paciente fue actualizado con exito: {}", pacienteSalidaDto);
-        }else {
-            logger.error("El paciente no se encuentra registrado, por lo tanto no es posible atualizarlo.");
+
+            if (pacienteParaActualizar != null) {
+                pacienteParaActualizar.setNombre(pacienteEntity.getNombre());
+                pacienteParaActualizar.setApellido(pacienteEntity.getApellido());
+                pacienteParaActualizar.setDni(pacienteEntity.getDni());
+                pacienteParaActualizar.setFechaIngreso(pacienteEntity.getFechaIngreso());
+                pacienteParaActualizar.setDomicilio(pacienteEntity.getDomicilio());
+
+                pacienteSalidaDto = modelMapper.map(pacienteParaActualizar, PacienteSalidaDto.class);
+
+                logger.warn("El paciente fue actualizado: {}", JsonPrinter.toString(pacienteSalidaDto));
+            } else {
+                logger.error("El paciente no se encuentra registrado, por lo tanto no es posible atualizarlo.");
+            }
+
+            return pacienteSalidaDto;
+
         }
 
-        return pacienteSalidaDto;
-
-    }
 
     private void configureMapping(){
     modelMapper.typeMap(PacienteEntradaDto.class,Paciente.class )

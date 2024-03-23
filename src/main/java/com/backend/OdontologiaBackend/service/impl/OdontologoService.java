@@ -6,6 +6,7 @@ import com.backend.OdontologiaBackend.entity.Odontologo;
 import com.backend.OdontologiaBackend.exceptions.ResourceNotFoundException;
 import com.backend.OdontologiaBackend.repository.OdontologoRepository;
 import com.backend.OdontologiaBackend.service.IOdontologoService;
+import com.backend.OdontologiaBackend.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,7 @@ public class OdontologoService implements IOdontologoService {
 
         OdontologoSalidaDto odontologoSalidaDto = modelMapper.map(odontologoConId, OdontologoSalidaDto.class);
 
-        logger.info("Odontologo registrado: {}", odontologoSalidaDto);
+        logger.info("Odontologo registrado: {}", JsonPrinter.toString(odontologoSalidaDto));
 
         return odontologoSalidaDto;
     }
@@ -48,7 +49,7 @@ public class OdontologoService implements IOdontologoService {
                 .map(odontologo -> modelMapper.map(odontologo, OdontologoSalidaDto.class))
                 .toList();
 
-        logger.info("Lista de odontologo: {}", odontologosSalidaDto);
+        logger.info("Lista de odontologo: {}", JsonPrinter.toString(odontologosSalidaDto));
 
         return odontologosSalidaDto;
     }
@@ -64,6 +65,8 @@ public class OdontologoService implements IOdontologoService {
         } else logger.error("No se pudo encontrar el Odontologo que buscaste.");
 
         return odontologoEncontrado;
+
+
     }
 
     public void eliminarOdontologo(@PathVariable Long id) throws ResourceNotFoundException {
@@ -82,11 +85,13 @@ public class OdontologoService implements IOdontologoService {
         OdontologoSalidaDto odontologoSalidaDto = null;    //Se declara lo que se va a retornar.
 
         if (odontologoParaActualizar != null) {
-            odontologoParaActualizar = odontologoEntity;
-            odontologoRepository.save(odontologoParaActualizar);
+            odontologoParaActualizar.setNumeroMatricula(odontologoEntity.getNumeroMatricula());
+            odontologoParaActualizar.setNombre(odontologoEntity.getNombre());
+            odontologoParaActualizar.setApellido(odontologoEntity.getApellido());
 
             odontologoSalidaDto = modelMapper.map(odontologoParaActualizar, OdontologoSalidaDto.class);
-            logger.warn("El odontologo fue actualizado: {}", odontologoSalidaDto);
+
+            logger.warn("El odontologo fue actualizado: {}", JsonPrinter.toString(odontologoSalidaDto));
         } else {
             logger.error("El odontologo no se encuentra registrado, por lo tanto no es posible atualizarlo.");
         }

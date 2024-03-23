@@ -12,6 +12,7 @@ import com.backend.OdontologiaBackend.exceptions.BadRequestException;
 import com.backend.OdontologiaBackend.exceptions.ResourceNotFoundException;
 import com.backend.OdontologiaBackend.repository.TurnoRepository;
 import com.backend.OdontologiaBackend.service.ITurnoService;
+import com.backend.OdontologiaBackend.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +58,7 @@ public class TurnoService implements ITurnoService {
         } else {
             Turno turnoNuevo = turnoRepository.save(modelMapper.map(turno, Turno.class));
             turnoSalidaDto = entidadADtoSalida(turnoNuevo, pacienteValido, odontologoValido);
-            logger.info("El turno se registro con exito: {}", turnoSalidaDto);
+            logger.info("El turno se registro con exito: {}", JsonPrinter.toString(turnoSalidaDto));
         }
 
         return turnoSalidaDto;
@@ -70,7 +71,7 @@ public class TurnoService implements ITurnoService {
                 .map(turno -> modelMapper.map(turno, TurnoSalidaDto.class))
                 .toList();
 
-        logger.info("Listado de turnos: {}", turnoSalidaDtos);
+        logger.info("Listado de turnos: {}", JsonPrinter.toString(turnoSalidaDtos));
 
         return turnoSalidaDtos;
     }
@@ -82,7 +83,7 @@ public class TurnoService implements ITurnoService {
 
         if (turnoBuscado != null){
             turnoEncontrado = modelMapper.map(turnoBuscado, TurnoSalidaDto.class);
-            logger.info("El paciente que busca es: {}", turnoEncontrado);
+            logger.info("El paciente que busca es: {}", JsonPrinter.toString(turnoEncontrado));
         }else {
             logger.error("El turno que usted busca no se ha encontrado");
         }
@@ -108,10 +109,12 @@ public class TurnoService implements ITurnoService {
         TurnoSalidaDto turnoSalidaDto = null;
 
         if(turnoParaActualizar != null){
-            turnoParaActualizar = turnoEntity;
-            turnoRepository.save(turnoParaActualizar);
+            turnoParaActualizar.setOdontologo(turnoEntity.getOdontologo());
+            turnoParaActualizar.setPaciente(turnoEntity.getPaciente());
+            turnoParaActualizar.setFechaYHora(turnoEntity.getFechaYHora());
+
             turnoSalidaDto = modelMapper.map(turnoParaActualizar, TurnoSalidaDto.class);
-            logger.warn("El turno fue actualizado con exito: {}", turnoSalidaDto);
+            logger.warn("El turno fue actualizado con exito: {}", JsonPrinter.toString(turnoSalidaDto));
         }else {
             logger.error("El turno no se encuentra registrado, por lo tanto no es posible atualizarlo.");
         }
