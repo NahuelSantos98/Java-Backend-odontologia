@@ -27,7 +27,6 @@ public class TurnoService implements ITurnoService {
     private TurnoRepository turnoRepository;
 
     private final ModelMapper modelMapper;
-
     private PacienteService pacienteService;
     private OdontologoService odontologoService;
 
