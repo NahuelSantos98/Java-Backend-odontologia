@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class Paciente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(length = 50)
     private String nombre;
@@ -83,8 +83,6 @@ public class Paciente {
         this.domicilio = domicilio;
     }
 
-    @Override
-    public String toString() {
-        return "Id: " + id + " - Nombre: " + nombre + " - Apellido: " + apellido + " - DNI: " + dni + " - Fechas de ingreso: " + fechaIngreso + " - Domicilio: " + domicilio;
-    }
 }
+
+

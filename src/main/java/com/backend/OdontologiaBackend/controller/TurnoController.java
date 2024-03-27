@@ -27,8 +27,8 @@ public class TurnoController {
     }
 
     @PostMapping("/registrar")
-    public ResponseEntity<TurnoSalidaDto> registrar(TurnoEntradaDto turno) throws BadRequestException, ResourceNotFoundException {
-        return new ResponseEntity<>(turnoService.registrar(turno), HttpStatus.CREATED );
+    public ResponseEntity<TurnoSalidaDto> registrar(TurnoEntradaDto turnoEntradaDto) throws BadRequestException, ResourceNotFoundException {
+        return new ResponseEntity<>(turnoService.registrar(turnoEntradaDto), HttpStatus.CREATED );
     }
 
     @GetMapping("/buscar/{id}")

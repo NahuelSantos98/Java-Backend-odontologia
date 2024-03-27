@@ -104,6 +104,7 @@ public class PacienteService implements IPacienteService {
                 pacienteParaActualizar.setDni(pacienteEntity.getDni());
                 pacienteParaActualizar.setFechaIngreso(pacienteEntity.getFechaIngreso());
                 pacienteParaActualizar.setDomicilio(pacienteEntity.getDomicilio());
+                pacienteRepository.save(pacienteParaActualizar);
 
                 pacienteSalidaDto = modelMapper.map(pacienteParaActualizar, PacienteSalidaDto.class);
 

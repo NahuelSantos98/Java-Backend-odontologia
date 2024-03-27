@@ -2,7 +2,9 @@ package com.backend.OdontologiaBackend.service.impl;
 
 import com.backend.OdontologiaBackend.dto.entrada.OdontologoEntradaDto;
 import com.backend.OdontologiaBackend.dto.salida.OdontologoSalidaDto;
+import com.backend.OdontologiaBackend.dto.salida.PacienteSalidaDto;
 import com.backend.OdontologiaBackend.entity.Odontologo;
+import com.backend.OdontologiaBackend.entity.Paciente;
 import com.backend.OdontologiaBackend.exceptions.ResourceNotFoundException;
 import com.backend.OdontologiaBackend.repository.OdontologoRepository;
 import com.backend.OdontologiaBackend.service.IOdontologoService;
@@ -65,9 +67,8 @@ public class OdontologoService implements IOdontologoService {
         } else logger.error("No se pudo encontrar el Odontologo que buscaste.");
 
         return odontologoEncontrado;
-
-
     }
+
 
     public void eliminarOdontologo(@PathVariable Long id) throws ResourceNotFoundException {
         if (odontologoRepository.findById(id) != null) {
@@ -88,6 +89,7 @@ public class OdontologoService implements IOdontologoService {
             odontologoParaActualizar.setNumeroMatricula(odontologoEntity.getNumeroMatricula());
             odontologoParaActualizar.setNombre(odontologoEntity.getNombre());
             odontologoParaActualizar.setApellido(odontologoEntity.getApellido());
+            odontologoRepository.save(odontologoParaActualizar);
 
             odontologoSalidaDto = modelMapper.map(odontologoParaActualizar, OdontologoSalidaDto.class);
 

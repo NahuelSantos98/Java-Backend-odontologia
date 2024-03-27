@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 public class OdontologoEntradaDto {
 
     @NotNull(message = "El numero de matricula no puede ser nulo")
-    @Size(max = 50, message = "El campo debe tener minimo 10 caracteres y maximo 50")
+    @Size(min =3 , max = 50, message = "El campo debe tener minimo 10 caracteres y maximo 50")
     @Positive(message = "El numero de matricula debe ser positivo")
     private int numeroMatricula;
 

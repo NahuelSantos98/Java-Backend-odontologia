@@ -39,10 +39,11 @@ public class TurnoService implements ITurnoService {
     }
 
     @Override
-    public TurnoSalidaDto registrar(TurnoEntradaDto turno) throws BadRequestException {
+    public TurnoSalidaDto registrar(TurnoEntradaDto turnoEntradaDto) throws BadRequestException {
         TurnoSalidaDto turnoSalidaDto;
-        PacienteSalidaDto pacienteValido = pacienteService.buscarPacientePorId(turno.getPacienteId());
-        OdontologoSalidaDto odontologoValido = odontologoService.buscarPorId(turno.getOdontologoId());
+        Long idPaciente = turnoEntradaDto.getPacienteId();
+        PacienteSalidaDto pacienteValido = pacienteService.buscarPacientePorId(turnoEntradaDto.getPacienteId());
+        OdontologoSalidaDto odontologoValido = odontologoService.buscarPorId(turnoEntradaDto.getOdontologoId());
 
         if(odontologoValido == null || pacienteValido == null){
             if(pacienteValido == null && odontologoValido == null){
@@ -56,7 +57,7 @@ public class TurnoService implements ITurnoService {
                 throw new BadRequestException("El odontologo NO se encuentra en la Base de Datos");
             }
         } else {
-            Turno turnoNuevo = turnoRepository.save(modelMapper.map(turno, Turno.class));
+            Turno turnoNuevo = turnoRepository.save(modelMapper.map(turnoEntradaDto, Turno.class));
             turnoSalidaDto = entidadADtoSalida(turnoNuevo, pacienteValido, odontologoValido);
             logger.info("El turno se registro con exito: {}", JsonPrinter.toString(turnoSalidaDto));
         }
@@ -112,6 +113,7 @@ public class TurnoService implements ITurnoService {
             turnoParaActualizar.setOdontologo(turnoEntity.getOdontologo());
             turnoParaActualizar.setPaciente(turnoEntity.getPaciente());
             turnoParaActualizar.setFechaYHora(turnoEntity.getFechaYHora());
+            turnoRepository.save(turnoParaActualizar);
 
             turnoSalidaDto = modelMapper.map(turnoParaActualizar, TurnoSalidaDto.class);
             logger.warn("El turno fue actualizado con exito: {}", JsonPrinter.toString(turnoSalidaDto));
