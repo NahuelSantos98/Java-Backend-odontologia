@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class TurnoService implements ITurnoService {
@@ -66,14 +67,20 @@ public class TurnoService implements ITurnoService {
 
     @Override
     public List<TurnoSalidaDto> listarTurnos() {
-        List<TurnoSalidaDto> turnoSalidaDtos = turnoRepository.findAll()
-                .stream()
-                .map(turno -> modelMapper.map(turno, TurnoSalidaDto.class))
-                .toList();
+        List<Turno> turnosListados = turnoRepository.findAll();
+        List<TurnoSalidaDto> turnosParaMostrar = new ArrayList<>();
 
-        logger.info("Listado de turnos: {}", JsonPrinter.toString(turnoSalidaDtos));
+        turnosListados.forEach(turno -> {
+            PacienteSalidaDto pacienteSalidaDto = pacienteService.buscarPacientePorId(turno.getPaciente().getId());
+            OdontologoSalidaDto odontologoSalidaDto = odontologoService.buscarPorId(turno.getOdontologo().getId());
 
-        return turnoSalidaDtos;
+            TurnoSalidaDto turnoSalidaDto = entidadADtoSalida(turno, pacienteSalidaDto, odontologoSalidaDto);
+            turnosParaMostrar.add(turnoSalidaDto);
+        });
+
+        logger.info("Listado de turnos: {}", JsonPrinter.toString(turnosParaMostrar));
+
+        return turnosParaMostrar;
     }
 
     @Override
@@ -82,7 +89,11 @@ public class TurnoService implements ITurnoService {
         TurnoSalidaDto turnoEncontrado = null;
 
         if (turnoBuscado != null){
-            turnoEncontrado = modelMapper.map(turnoBuscado, TurnoSalidaDto.class);
+
+            PacienteSalidaDto pacienteSalidaDto= pacienteService.buscarPacientePorId(turnoBuscado.getPaciente().getId());
+            OdontologoSalidaDto odontologoSalidaDto = odontologoService.buscarPorId(turnoBuscado.getOdontologo().getId());
+
+            turnoEncontrado = entidadADtoSalida(turnoBuscado, pacienteSalidaDto, odontologoSalidaDto);
             logger.info("El paciente que busca es: {}", JsonPrinter.toString(turnoEncontrado));
         }else {
             logger.error("El turno que usted busca no se ha encontrado");
@@ -114,7 +125,11 @@ public class TurnoService implements ITurnoService {
             turnoParaActualizar.setFechaYHora(turnoEntity.getFechaYHora());
             turnoRepository.save(turnoParaActualizar);
 
-            turnoSalidaDto = modelMapper.map(turnoParaActualizar, TurnoSalidaDto.class);
+
+            PacienteSalidaDto pacienteSalidaDto= pacienteService.buscarPacientePorId(turnoParaActualizar.getPaciente().getId());
+            OdontologoSalidaDto odontologoSalidaDto = odontologoService.buscarPorId(turnoParaActualizar.getOdontologo().getId());
+
+            turnoSalidaDto = entidadADtoSalida(turnoParaActualizar, pacienteSalidaDto, odontologoSalidaDto);
             logger.warn("El turno fue actualizado con exito: {}", JsonPrinter.toString(turnoSalidaDto));
         }else {
             logger.error("El turno no se encuentra registrado, por lo tanto no es posible atualizarlo.");
