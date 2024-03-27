@@ -69,9 +69,9 @@ public class PacienteService implements IPacienteService {
     @Override
     public PacienteSalidaDto buscarPacientePorId(Long id) {
 
-        //Paciente pase a PacienteSalida. Para eso tiene que pasar por el mapper, YA TIENE el ID.
-        Paciente pacienteBuscado = pacienteRepository.findById(id).orElse(null);    //Se pone el .orElse(null) si no lo encuentra = null
-        PacienteSalidaDto pacienteEncontrado = null;   //Se declara afuera por las dudas de que NO lo encuentre.
+
+        Paciente pacienteBuscado = pacienteRepository.findById(id).orElse(null);
+        PacienteSalidaDto pacienteEncontrado = null;
 
         if(pacienteBuscado != null){
             pacienteEncontrado = modelMapper.map(pacienteBuscado, PacienteSalidaDto.class);
@@ -121,11 +121,10 @@ public class PacienteService implements IPacienteService {
     private void configureMapping(){
     modelMapper.typeMap(PacienteEntradaDto.class,Paciente.class )
             .addMappings(mapper -> mapper.map(PacienteEntradaDto::getDomicilio , Paciente::setDomicilio));
-            //Asigna el valor del domicilio del pacienteEntrada a el domicilio de Paciente.
+
 
         modelMapper.typeMap(Paciente.class, PacienteSalidaDto.class)
                 .addMappings(mapper-> mapper.map(Paciente::getDomicilio, PacienteSalidaDto::setDomicilioSalidaDto));
-                //Asigna valor de domicilio del paciente al valor de domicilio de pacienteSalida
 
     }
 

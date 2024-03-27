@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pacientes")
+@CrossOrigin(origins = "*")
 public class PacienteController {
 
     private IPacienteService pacienteService;
@@ -29,7 +30,7 @@ public class PacienteController {
    }
 
     //BUSCAR
-   @GetMapping("/buscar/{id}")        //localhost:8080/pacientes/x
+   @GetMapping("/buscar/{id}")
    public ResponseEntity<PacienteSalidaDto> buscarPacienteId(@PathVariable Long id){
         return new ResponseEntity<>(pacienteService.buscarPacientePorId(id), HttpStatus.OK);
    }
@@ -42,13 +43,13 @@ public class PacienteController {
 
     //ACTUALIZAR
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<PacienteSalidaDto> actualizarPaciente(@RequestBody @Valid PacienteEntradaDto paciente,@PathVariable Long id){  //Va a recibir en el body un cliente entero
+    public ResponseEntity<PacienteSalidaDto> actualizarPaciente(@RequestBody @Valid PacienteEntradaDto paciente,@PathVariable Long id){
         return new ResponseEntity<>(pacienteService.modificarPaciente(paciente,id), HttpStatus.ACCEPTED);
     }
 
     //BORRAR
     @DeleteMapping("/borrar/{id}")
-    public ResponseEntity<?> borrarPaciente(@PathVariable Long id) throws ResourceNotFoundException {      //Se deja el ? Se deja abierta la posibilidad que se pueda hacer cua;quier cosa.
+    public ResponseEntity<?> borrarPaciente(@PathVariable Long id) throws ResourceNotFoundException {
         pacienteService.eliminarPaciente(id);
         return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.NO_CONTENT);
     }

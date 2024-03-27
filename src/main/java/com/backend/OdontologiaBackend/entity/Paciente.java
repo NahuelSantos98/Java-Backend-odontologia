@@ -14,12 +14,12 @@ public class Paciente {
     private String nombre;
     @Column(length = 50)
     private String apellido;
-    @Column(length = 12) //Por los 12 digitos en el dto entrada
+    @Column(length = 12)
     private int dni;
-    @Column(length = 10) //Por el JsonFormat
+    @Column(length = 10)
     private LocalDate fechaIngreso;
 
-    @OneToOne(cascade = CascadeType.ALL)  //Termina en ToOne el fetch va a ser EAGER
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "domicilio_id")
     private Domicilio domicilio;
 

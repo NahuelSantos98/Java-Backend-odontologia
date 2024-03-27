@@ -144,7 +144,6 @@ public class TurnoService implements ITurnoService {
         return turnoSalidaDto;
     }
 
-    //Se usa esto ya que al depender de otros servicios con su propio mapper, nos devuelve la entidad mapeada.
 }
 
 

@@ -81,9 +81,9 @@ public class OdontologoService implements IOdontologoService {
 
     @Override
     public OdontologoSalidaDto modificarOdontologo(OdontologoEntradaDto odontologoEntradaDto, Long id) {
-        Odontologo odontologoEntity = modelMapper.map(odontologoEntradaDto, Odontologo.class);  //Mapea el odontologo recibido.
-        Odontologo odontologoParaActualizar = odontologoRepository.findById(id).orElse(null);  //Busca el odontologo para actualizarlo
-        OdontologoSalidaDto odontologoSalidaDto = null;    //Se declara lo que se va a retornar.
+        Odontologo odontologoEntity = modelMapper.map(odontologoEntradaDto, Odontologo.class);
+        Odontologo odontologoParaActualizar = odontologoRepository.findById(id).orElse(null);
+        OdontologoSalidaDto odontologoSalidaDto = null;
 
         if (odontologoParaActualizar != null) {
             odontologoParaActualizar.setNumeroMatricula(odontologoEntity.getNumeroMatricula());

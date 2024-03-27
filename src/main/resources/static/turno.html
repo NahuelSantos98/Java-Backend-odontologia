@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turno</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h2>Turno</h2>
+<hr>
+
+        <a href="odontologo.html"><button>Ir a registrar Odontolgo</button></a>
+        <a href="paciente.html"><button>Ir a registrar Paciente</button></a>
+
+<hr>
+        <section class="registrar">
+            <h4 style="font-size: 24px;">Registrar</h4>
+            <form class="registrarForm">
+                    <label for="idPacienteRegistrar">ID Paciente:</label><br>
+                    <input type="number" id="idPacienteRegistrar" name="idPacienteRegistrar" required><br><br>
+                    
+                    <label for="idOdontologoRegistrar">ID Odontólogo:</label><br>
+                    <input type="number" id="idOdontologoRegistrar" name="idOdontologoRegistrar" required><br><br>
+                    
+                    <label for="fechaYHoraRegistrar">Fecha y Hora:</label><br>
+                    <input type="text" id="fechaYHoraRegistrar" name="fechaYHoraRegistrar" placeholder="yyyy-MM-dd HH:mm" required><br><br>
+                    
+                    <input type="submit" value="Registrar Turno">
+            </form>
+        </section>
+
+<hr>
+
+        <section class="buscar">
+            <h4 style="font-size: 24px;">Buscar</h4>
+            <form class="buscarForm">
+                <label for="idBuscar">ID:</label><br>
+                <input type="number" id="idBuscar" name="idBuscar" required><br><br>
+                <input type="submit" value="Enviar">
+            </form>
+        </section>
+
+<hr>
+
+        <section class="listar">
+            <h4 style="font-size: 24px;">Listar Turnos</h4>
+            <button class="mostrarTurnos">Listar turnos</button>
+            <div class="lugarParaMostrarTurnos"></div>
+        </section>
+
+<hr>            
+        
+        <section class="eliminar">
+            <h4 style="font-size: 24px;">Eliminar</h4>
+            <form class="formularioBorrar">
+                <label for="idBorrar">ID para borrar:</label><br>
+                <input type="number" id="idBorrar" name="idBorrar" required><br><br>
+                <input type="submit" value="Enviar">
+            </form>
+        </section>
+
+<hr>
+
+<section class="modificar">
+    <h4 style="font-size: 24px;">Modificar con el ID</h4>
+    <form class="formularioModificar">
+        <label for="idModificar">ID de turno para modificar:</label><br>
+        <input type="number" id="idModificar" name="idModificar" required><br><br>
+        <label for="idPacienteModificar">ID Paciente:</label><br>
+        <input type="number" id="idPacienteModificar" name="idPacienteModificar" required><br><br>
+        
+        <label for="idOdontologoModificar">ID Odontólogo:</label><br>
+        <input type="number" id="idOdontologoModificar" name="idOdontologoModificar" required><br><br>
+        
+        <label for="fechaYHoraModificar">Fecha y Hora:</label><br>
+        <input type="text" id="fechaYHoraModificar" name="fechaYHoraModificar" placeholder="yyyy-MM-dd HH:mm" required><br><br>
+        
+        <input type="submit" value="Registrar Turno"><br><br>
+    </form>
+        
+</section>
+
+    </div>
+
+    <script src="js/usoApiTurno.js"></script>
+</body>
+</html>

@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController     //Para que devuelva en formato JSON
 @RequestMapping("/odontologos")
+@CrossOrigin(origins = "*")
 public class OdontologoController {
 
     private IOdontologoService odontologoService;

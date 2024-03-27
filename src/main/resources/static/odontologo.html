@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odontologos</title>
+</head>
+<body>
+    <div>
+        <div style="text-align: center;">
+            <h2 style="font-size: 30px;">Odontologos</h2>
+
+<hr>
+<a href="turno.html"><button>Ir a registrar Turno</button></a>
+<a href="paciente.html"><button>Ir a registrar Paciente</button></a>
+<hr>
+
+
+            <section class="registrar">
+                <h4 style="font-size: 24px;">Registrar</h4>
+                <form class="registrarForm">
+                    <label for="numeroMatricula">Número de Matrícula:</label><br>
+                    <input type="text" id="numeroMatricula" name="numeroMatricula" required><br>
+                    <label for="nombreRegistro">Nombre:</label><br>
+                    <input type="text" id="nombreRegistro" name="nombreRegistro" required><br>
+                    <label for="apellidoRegistro">Apellido:</label><br>
+                    <input type="text" id="apellidoRegistro" name="apellidoRegistro" required><br><br>
+                    <input type="submit" value="Enviar">
+                </form>            
+            </section>
+
+<hr>
+
+            <section class="buscar">
+                <h4 style="font-size: 24px;">Buscar</h4>
+                <form class="buscarForm">
+                    <label for="idBuscar">ID:</label><br>
+                    <input type="number" id="idBuscar" name="idBuscar" required><br><br>
+                    <input type="submit" value="Enviar">
+                </form>
+            </section>
+
+<hr>
+
+            <section class="listar">
+                <h4 style="font-size: 24px;">Listar Odontologos</h4>
+                <button class="mostrarOdontologos">Listar odontologos</button>
+                <div class="lugarParaMostrarOdontolgos"></div>
+            </section>
+
+<hr>
+
+            <section class="eliminar">
+                <h4 style="font-size: 24px;">Eliminar</h4>
+                <form class="formularioBorrar">
+                    <label for="idBorrar">ID para borrar:</label><br>
+                    <input type="number" id="idBorrar" name="idBorrar" required><br><br>
+                    <input type="submit" value="Enviar">
+                </form>
+            </section>
+
+<hr>    
+
+            <section class="modificar">
+                <h4 style="font-size: 24px;">Modificar con el ID</h4>
+                <form class="formularioModificar">
+                    <label for="idModificar">ID para buscar:</label><br>
+                    <input type="text" id="idModificar" name="idModificar" required><br>
+                    <label for="numeroMatriculaModificar">Número de Matrícula:</label><br>
+                    <input type="text" id="numeroMatriculaModificar" name="numeroMatriculaModificar" required><br>
+                    <label for="nombreModificar">Nombre:</label><br>
+                    <input type="text" id="nombreModificar" name="nombreModificar" required><br>
+                    <label for="apellidoModificar">Apellido:</label><br>
+                    <input type="text" id="apellidoModificar" name="apellidoModificar" required><br><br>
+                    <input type="submit" value="Enviar">
+                </form>
+            </section>
+
+
+        </div>
+    </div>
+    <script src="js/usoApiOdontologo.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

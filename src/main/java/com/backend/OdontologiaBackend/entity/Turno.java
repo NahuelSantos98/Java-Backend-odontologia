@@ -18,7 +18,7 @@ public class Turno {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-    @Column(length = 19) //Por el JsonFormat
+    @Column(length = 19)
     private LocalDateTime fechaYHora;
 
     public Turno() {

@@ -2,7 +2,6 @@ package com.backend.OdontologiaBackend.dto.salida;
 
 public class OdontologoSalidaDto {
 
-    //No validacion ya que esta previamente validado por el codigo en sí.
     private Long id;
     private int numeroMatricula;
     private String nombre;

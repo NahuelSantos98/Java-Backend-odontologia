@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacientes</title>
+</head>
+<body>
+    <div>
+        <div style="text-align: center;">
+            <h2 style="font-size: 30px;">Pacientes</h2>
+<hr>
+            <a href="odontologo.html"><button>Ir a registrar Odontolgo</button></a>
+            <a href="turno.html"><button>Ir a registrar Turno</button></a>
+<hr>
+            <section class="registrar">
+                <h4 style="font-size: 24px;">Registrar</h4>
+                <form class="registrarForm">
+                    <label for="nombreRegistrar">Nombre:</label><br>
+                    <input type="text" id="nombreRegistrar" name="nombreRegistrar" required><br>
+                    <label for="apellidoRegistrar">Apellido:</label><br>
+                    <input type="text" id="apellidoRegistrar" name="apellidoRegistrar" required><br>
+                    <label for="dniRegistrar">DNI:</label><br>
+                    <input type="text" id="dniRegistrar" name="dniRegistrar" required><br>
+                    <label for="fechaIngresoRegistrar">Fecha de ingreso:</label><br>
+                    <input type="text" id="fechaIngresoRegistrar" name="fechaIngresoRegistrar" placeholder="yyyy-MM-dd" required><br>
+                    <label for="calleRegistrar">Calle:</label><br>
+                    <input type="text" id="calleRegistrar" name="calleRegistrar" required><br>
+                    <label for="numeroRegistrar">Número:</label><br>
+                    <input type="text" id="numeroRegistrar" name="numeroRegistrar" required><br>
+                    <label for="localidadRegistrar">Localidad:</label><br>
+                    <input type="text" id="localidadRegistrar" name="localidadRegistrar" required><br>
+                    <label for="provinciaRegistrar">Provincia:</label><br>
+                    <input type="text" id="provinciaRegistrar" name="provinciaRegistrar" required><br><br>
+                    <input type="submit" value="Enviar">
+                    </form>
+            </section>
+            <hr>
+            <section class="buscar">
+                <h4 style="font-size: 24px;">Buscar</h4>
+                <form class="buscarForm">
+                    <label for="idBuscar">ID:</label><br>
+                    <input type="number" id="idBuscar" name="idBuscar" required><br><br>
+                    <input type="submit" value="Enviar">
+                </form>
+            </section>
+            <hr>
+            <section class="listar">
+                <h4 style="font-size: 24px;">Listar Pacientes</h4>
+                <button class="mostrarPacientes">Listar pacientes</button>
+                <div class="lugarParaMostrarPacientes"></div>
+            </section>
+            <hr>
+            <section class="eliminar">
+                <h4 style="font-size: 24px;">Eliminar</h4>
+                <form class="formularioBorrar">
+                    <label for="idBorrar">ID para borrar:</label><br>
+                    <input type="number" id="idBorrar" name="idBorrar" required><br><br>
+                    <input type="submit" value="Enviar">
+                </form>
+            </section>
+            <hr>
+            <section class="modificar">
+                <h4 style="font-size: 24px;">Modificar con el ID</h4>
+                <form class="formularioModificar">
+                    <label for="idModificar">ID:</label><br>
+                    <input type="text" id="idModificar" name="idModificar" required><br>
+                        <label for="nombreModificar">Nombre:</label><br>
+                        <input type="text" id="nombreModificar" name="nombreModificar" required><br>
+                        <label for="apellidoModificar">Apellido:</label><br>
+                        <input type="text" id="apellidoModificar" name="apellidoModificar" required><br>
+                        <label for="dniModificar">DNI:</label><br>
+                        <input type="text" id="dniModificar" name="dniModificar" required><br>
+                        <label for="fechaIngresoModificar">Fecha de ingreso:</label><br>
+                        <input type="text" id="fechaIngresoModificar" name="fechaIngresoModificar" placeholder="yyyy-MM-dd" required><br>
+                        <label for="calleModificar">Calle:</label><br>
+                        <input type="text" id="calleModificar" name="calleModificar" required><br>
+                        <label for="numeroModificar">Número:</label><br>
+                        <input type="text" id="numeroModificar" name="numeroModificar" required><br>
+                        <label for="localidadModificar">Localidad:</label><br>
+                        <input type="text" id="localidadModificar" name="localidadModificar" required><br>
+                        <label for="provinciaModificar">Provincia:</label><br>
+                        <input type="text" id="provinciaModificar" name="provinciaModificar" required><br><br>
+                        <input type="submit" value="Enviar">
+                    </form>
+            </section>
+            <hr>
+        </div>
+    </div>
+    <script src="js/usoApiPaciente.js"></script>
+</body>
+</html>
